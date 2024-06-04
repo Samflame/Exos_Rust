@@ -10,3 +10,5 @@ fn main() {
     println!("Number {}", NUMBER);
 }
 
+//La constante NUMBER doit être déclarée avec une annotation de type explicite
+//J’ai ajouté : u32 après NUMBER pour spécifier que NUMBER est un entier non signé de 32 bits
