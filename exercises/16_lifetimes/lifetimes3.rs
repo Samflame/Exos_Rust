@@ -5,11 +5,11 @@
 // Execute `rustlings hint lifetimes3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// I AM DONE
 
-struct Book {
-    author: &str,
-    title: &str,
+struct Book<'a> {
+    author: &'a str,
+    title: &'a str,
 }
 
 fn main() {
@@ -19,3 +19,5 @@ fn main() {
 
     println!("{} by {}", book.title, book.author);
 }
+
+//Pour respecter le fait que les références doivent zvoir une durée de vie, j'ai modifié la structure de Book
