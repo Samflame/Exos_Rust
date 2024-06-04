@@ -10,3 +10,5 @@
 fn main() {
     println!("Hello there!")
 }
+
+//La fonction correcte pour afficher du texte dans la console est println!
