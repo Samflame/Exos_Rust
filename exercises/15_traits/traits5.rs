@@ -7,7 +7,7 @@
 // Execute `rustlings hint traits5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// I AM DONE
 
 pub trait SomeTrait {
     fn some_function(&self) -> bool {
@@ -29,8 +29,7 @@ impl OtherTrait for SomeStruct {}
 impl SomeTrait for OtherStruct {}
 impl OtherTrait for OtherStruct {}
 
-// YOU MAY ONLY CHANGE THE NEXT LINE
-fn some_func(item: ??) -> bool {
+fn some_func<T: SomeTrait + OtherTrait>(item: T) -> bool {
     item.some_function() && item.other_function()
 }
 
@@ -38,3 +37,5 @@ fn main() {
     some_func(SomeStruct {});
     some_func(OtherStruct {});
 }
+
+//Pour que some_func accepte un paramètre qui implémente à la fois SomeTrait et OtherTrait, j'uutilise une borne multiple dans la signature de la fonction
