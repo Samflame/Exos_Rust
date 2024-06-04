@@ -11,7 +11,7 @@
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// I AM DONE
 
 use std::collections::HashMap;
 
@@ -33,9 +33,7 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 }
 
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
-    // map is a hashmap with String keys and Progress values.
-    // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    map.values().filter(|&&v| v == value).count()
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -154,3 +152,6 @@ mod tests {
         vec![map, other]
     }
 }
+
+//Pour count_iterator, j'ai utilisé .values() pour obtenir un itérateur sur les valeurs de la HashMap, puis .filter() pour sélectionner les valeurs égales à value, et enfin .count() pour compter les éléments filtrés.
+// Pour count_collection_iterator: j'ai utilisé  .iter() pour créer un itérateur sur la collection de HashMap, .flat_map() pour aplatir tous les itérateurs de valeurs en un seul itérateur, suivi de .filter() et .count() comme dans count_iterator.
