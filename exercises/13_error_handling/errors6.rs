@@ -13,30 +13,27 @@
 
 use std::num::ParseIntError;
 
-// This is a custom error type that we will be using in `parse_pos_nonzero()`.
+// Ce type d'erreur personnalisé sera utilisé dans `parse_pos_nonzero()`.
 #[derive(PartialEq, Debug)]
 enum ParsePosNonzeroError {
     Creation(CreationError),
     ParseInt(ParseIntError),
 }
 
-impl ParsePosNonzeroError {
-    fn from_creation(err: CreationError) -> ParsePosNonzeroError {
-        ParsePosNonzeroError::Creation(err)
+// Implémentation de la conversion des erreurs `ParseIntError` en `ParsePosNonzeroError`.
+impl From<ParseIntError> for ParsePosNonzeroError {
+    fn from(err: ParseIntError) -> Self {
+        ParsePosNonzeroError::ParseInt(err)
     }
-    // TODO: add another error conversion function here.
-    // fn from_parseint...
 }
 
+// Fonction pour analyser une chaîne de caractères et la convertir en `PositiveNonzeroInteger`.
 fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
-    // TODO: change this to return an appropriate error instead of panicking
-    // when `parse()` returns an error.
-    let x: i64 = s.parse().unwrap();
-    PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation)
+    let x: i64 = s.parse().map_err(ParsePosNonzeroError::from)?;
+    PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::Creation)
 }
 
-// Don't change anything below this line.
-
+// La structure `PositiveNonzeroInteger` et l'erreur `CreationError` restent inchangées.
 #[derive(PartialEq, Debug)]
 struct PositiveNonzeroInteger(u64);
 
@@ -56,13 +53,13 @@ impl PositiveNonzeroInteger {
     }
 }
 
+// Tests unitaires pour vérifier le comportement de la fonction `parse_pos_nonzero`.
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_parse_error() {
-        // We can't construct a ParseIntError, so we have to pattern match.
         assert!(matches!(
             parse_pos_nonzero("not a number"),
             Err(ParsePosNonzeroError::ParseInt(_))
@@ -92,3 +89,6 @@ mod test {
         assert_eq!(parse_pos_nonzero("42"), Ok(x.unwrap()));
     }
 }
+
+//J'ai ajouté une fonction de conversion d’erreur pour ParseIntError dans l’implémentation de ParsePosNonzeroError
+//J'ai modifié la fonction parse_pos_nonzero pour retourner correctement une erreur
