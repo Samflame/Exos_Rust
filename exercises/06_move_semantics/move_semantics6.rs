@@ -5,24 +5,26 @@
 // Execute `rustlings hint move_semantics6` or use the `hint` watch subcommand
 // for a hint.
 
-// I AM NOT DONE
+// I AM DONE
 
 fn main() {
     let data = "Rust is great!".to_string();
 
-    get_char(data);
+    let last_char = get_char(&data);
+    println!("Dernier caractère : {}", last_char);
 
-    string_uppercase(&data);
+    string_uppercase(data);
 }
 
-// Should not take ownership
-fn get_char(data: String) -> char {
+fn get_char(data: &String) -> char {
     data.chars().last().unwrap()
 }
 
-// Should take ownership
-fn string_uppercase(mut data: &String) {
-    data = &data.to_uppercase();
-
-    println!("{}", data);
+fn string_uppercase(data: String) {
+    let data_uppercase = data.to_uppercase();
+    println!("{}", data_uppercase);
 }
+
+//J’ai ajouté une variable last_char pour stocker le résultat de get_char et l’afficher
+// La fonction get_char prend maintenant une référence à une String au lieu de prendre possession de la String ce qui permet à data d’être utilisé à nouveau après l’appel à get_char.
+//Quant à la fonction string_uppercase, elle prend maintenant possession de la String passée en paramètre. Elle crée une nouvelle String en majuscules et l’affiche
