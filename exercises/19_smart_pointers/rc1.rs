@@ -10,7 +10,7 @@
 //
 // Execute `rustlings hint rc1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+// I AM DONE
 
 use std::rc::Rc;
 
@@ -60,18 +60,18 @@ fn main() {
     println!("reference count = {}", Rc::strong_count(&sun)); // 6 references
     jupiter.details();
 
-    // TODO
-    let saturn = Planet::Saturn(Rc::new(Sun {}));
+    // Utilisez Rc::clone pour augmenter le compteur de références correctement
+    let saturn = Planet::Saturn(Rc::clone(&sun));
     println!("reference count = {}", Rc::strong_count(&sun)); // 7 references
     saturn.details();
 
-    // TODO
-    let uranus = Planet::Uranus(Rc::new(Sun {}));
+    // Utilisez Rc::clone pour augmenter le compteur de références correctement
+    let uranus = Planet::Uranus(Rc::clone(&sun));
     println!("reference count = {}", Rc::strong_count(&sun)); // 8 references
     uranus.details();
 
-    // TODO
-    let neptune = Planet::Neptune(Rc::new(Sun {}));
+    // Utilisez Rc::clone pour augmenter le compteur de références correctement
+    let neptune = Planet::Neptune(Rc::clone(&sun));
     println!("reference count = {}", Rc::strong_count(&sun)); // 9 references
     neptune.details();
 
@@ -92,14 +92,17 @@ fn main() {
     drop(mars);
     println!("reference count = {}", Rc::strong_count(&sun)); // 4 references
 
-    // TODO
+    drop(earth);
     println!("reference count = {}", Rc::strong_count(&sun)); // 3 references
 
-    // TODO
+    drop(venus);
     println!("reference count = {}", Rc::strong_count(&sun)); // 2 references
 
-    // TODO
+    drop(mercury);
     println!("reference count = {}", Rc::strong_count(&sun)); // 1 reference
 
     assert_eq!(Rc::strong_count(&sun), 1);
 }
+
+//les planètes Saturn, Uranus et Neptune étaient créées avec de nouvelles instances de Sun au lieu d’utiliser Rc::clone(&sun), ce qui aurait dû être utilisé pour augmenter le compteur de références du sun existant. J’ai corrigé cela en utilisant Rc::clone(&sun) pour ces planètes.
+//De plus, j’ai ajouté les instructions drop pour earth, venus et mercury pour décrémenter le compteur de références à chaque étape
