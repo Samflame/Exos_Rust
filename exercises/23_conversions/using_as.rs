@@ -10,11 +10,11 @@
 // Execute `rustlings hint using_as` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// I AM DONE
 
 fn average(values: &[f64]) -> f64 {
     let total = values.iter().sum::<f64>();
-    total / values.len()
+    total / values.len() as f64 // Cast `values.len()` to f64
 }
 
 fn main() {
@@ -31,3 +31,5 @@ mod tests {
         assert_eq!(average(&[3.5, 0.3, 13.0, 11.7]), 7.125);
     }
 }
+
+//IL y a une erreur dans la fonction average. La méthode len() retourne une valeur de type usize, mais pour effectuer une division de flottants, j'ai mis le dénominateur en flottant aussi
