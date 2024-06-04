@@ -5,7 +5,7 @@
 // Execute `rustlings hint tests4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// I AM DONE
 
 struct Rectangle {
     width: i32,
@@ -46,3 +46,6 @@ mod tests {
         let _rect = Rectangle::new(10, -10);
     }
 }
+
+//Pour corriger le code j'ai dû ajouter les assertions assert_eq!(rect.width, 10) et assert_eq!(rect.height, 20) pour vérifier que la largeur et la hauteur du rectangle sont correctes.
+//De plus, j’ai également ajouté l’attribut #[should_panic(expected = "...")] aux tests negative_width et negative_height pour s’assurer qu’ils paniquent avec le message d’erreur attendu lorsque des valeurs négatives sont utilisées.
