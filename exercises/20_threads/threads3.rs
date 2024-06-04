@@ -3,10 +3,9 @@
 // Execute `rustlings hint threads3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// I AM DONE
 
 use std::sync::mpsc;
-use std::sync::Arc;
 use std::thread;
 use std::time::Duration;
 
@@ -26,22 +25,26 @@ impl Queue {
     }
 }
 
-fn send_tx(q: Queue, tx: mpsc::Sender<u32>) -> () {
-    thread::spawn(move || {
+fn send_tx(q: Queue, tx: mpsc::Sender<u32>) {
+    let tx1 = mpsc::Sender::clone(&tx);
+    let handle1 = thread::spawn(move || {
         for val in q.first_half {
             println!("sending {:?}", val);
-            tx.send(val).unwrap();
+            tx1.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
 
-    thread::spawn(move || {
+    let handle2 = thread::spawn(move || {
         for val in q.second_half {
             println!("sending {:?}", val);
             tx.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
+
+    handle1.join().unwrap();
+    handle2.join().unwrap();
 }
 
 #[test]
@@ -56,8 +59,16 @@ fn main() {
     for received in rx {
         println!("Got: {}", received);
         total_received += 1;
+        if total_received == queue_length {
+            break;
+        }
     }
 
     println!("total numbers received: {}", total_received);
-    assert_eq!(total_received, queue_length)
+    assert_eq!(total_received, queue_length);
 }
+
+
+//Les deux threads dans la fonction send_tx se terminent avant que la réception ne soit complète, car il n’y a pas de mécanisme pour garder le thread principal en vie jusqu’à ce que tous les messages soient reçus.
+//Pour résoudre ce problème, j'utilise join pour attendre que les threads se terminent.
+//J’ai donc ajouté des variables handle1 et handle2 pour stocker les handles des threads.
