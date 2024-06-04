@@ -6,10 +6,10 @@
 // I AM DONE
 
 fn main() {
-    let x = 10; // Attribuez une valeur à x (par exemple, 10)
-    if x == 10 {
-        println!("x est égal à dix !");
+    let x = 10;
+   if x == 10 {
+        println!("x is ten!");
     } else {
-        println!("x n'est pas égal à dix !");
+        println!("x is not ten!");
     }
 }
