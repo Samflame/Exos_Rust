@@ -13,8 +13,6 @@
 //
 // No hints this time ;)
 
-// I AM DONE
-
 // Put your function here!
 fn calculate_price_of_apples(quantity: i32) -> i32 {
     if quantity > 40 {
