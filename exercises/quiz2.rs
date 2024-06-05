@@ -20,8 +20,6 @@
 //
 // No hints this time!
 
-// I AM DONE
-
 pub enum Command {
     Uppercase,
     Trim,
