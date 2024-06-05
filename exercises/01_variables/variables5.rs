@@ -3,8 +3,6 @@
 // Execute `rustlings hint variables5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM DONE
-
 fn main() {
     let letters = "T-H-R-E-E";
     println!("Spell a Number : {}", letters);
