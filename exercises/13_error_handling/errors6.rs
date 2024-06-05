@@ -9,8 +9,6 @@
 // Execute `rustlings hint errors6` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM DONE
-
 use std::num::ParseIntError;
 
 // Ce type d'erreur personnalisé sera utilisé dans `parse_pos_nonzero()`.
